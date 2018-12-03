@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Post;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
 class ViewABlogPostTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function testCanViewABlogPost()
     {
         // Arrangement
@@ -25,6 +29,6 @@ class ViewABlogPostTest extends TestCase
         //  assert that we see post body
         $response->assertSee($post->body);
         //  assert that we see published date
-        $response->assertSee($post->created_at);
+        $response->assertSee($post->created_at->toFormattedDateString());
     }
 }

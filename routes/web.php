@@ -11,10 +11,18 @@
 |
 */
 
+use App\Post;
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/about', function () {
     return view('about');
+});
+
+Route::get('/post/{id}', function ($id) {
+    $post = Post::find($id);
+
+    return view('post')->withPost($post);
 });
