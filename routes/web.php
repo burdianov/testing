@@ -11,8 +11,6 @@
 |
 */
 
-use App\Post;
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,3 +20,5 @@ Route::get('/about', function () {
 });
 
 Route::get('/post/{id}', 'PostsController@index');
+
+Route::get('/posts', 'PostsController@showAllPosts');
