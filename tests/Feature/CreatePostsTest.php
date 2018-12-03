@@ -30,4 +30,30 @@ class CreatePostsTest extends TestCase
         $this->assertEquals('new post title', $post->title);
         $this->assertEquals('new post body', $post->body);
     }
+
+    /**
+     * @group title-req
+     */
+    public function testTitleIsRequiredToCreatePost()
+    {
+        $response = $this->post('/store-post', [
+            'title' => null,
+            'body' => 'new post body'
+        ]);
+
+        $response->assertSessionHasErrors('title');
+    }
+
+    /**
+     * @group body-req
+     */
+    public function testBodyIsRequiredToCreatePost()
+    {
+        $response = $this->post('/store-post', [
+            'title' => 'new post title',
+            'body' => null
+        ]);
+
+        $response->assertSessionHasErrors('body');
+    }
 }
